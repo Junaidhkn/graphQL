@@ -5,6 +5,13 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = `#graphql
+
+   schema{
+      query:Query
+   }
+
+
+
 type Query {
     greetings:String
   }

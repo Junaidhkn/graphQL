@@ -9,18 +9,18 @@ import JobDetail from './components/JobDetail';
 import JobForm from './components/JobForm';
 import NavBar from './components/NavBar';
 
-function App() {
+function App () {
 	const navigate = useNavigate();
-	const [loggedIn, setLoggedIn] = useState(isLoggedIn);
+	const [loggedIn, setLoggedIn] = useState( isLoggedIn );
 
 	const handleLogin = () => {
-		setLoggedIn(true);
-		navigate('/');
+		setLoggedIn( true );
+		navigate( '/' );
 	};
 
 	const handleLogout = () => {
-		setLoggedIn(false);
-		navigate('/');
+		setLoggedIn( false );
+		navigate( '/' );
 	};
 
 	return (

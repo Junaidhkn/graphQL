@@ -1,11 +1,11 @@
 import JobList from './JobList';
-import { jobs } from '../fake-data';
 import { getJobs } from '../graphQL/queries.js';
 
 
 
 getJobs()
 function JobBoard () {
+  const jobs = []
   return (
     <div>
       <h1 className="title">

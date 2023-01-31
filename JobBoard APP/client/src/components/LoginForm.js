@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { login } from '../auth';
 
-function LoginForm({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+function LoginForm ( { onLogin } ) {
+  const [email, setEmail] = useState( '' );
+  const [password, setPassword] = useState( '' );
+  const [error, setError] = useState( false );
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async ( event ) => {
     event.preventDefault();
-    setError(false);
-    const success = await login(email, password);
-    if (success) {
+    setError( false );
+    const success = await login( email, password );
+    if ( success ) {
       onLogin();
     } else {
-      setError(true);
+      setError( true );
     }
   };
 
@@ -25,7 +25,7 @@ function LoginForm({ onLogin }) {
         </label>
         <div className="control">
           <input className="input" type="email" required value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={( event ) => setEmail( event.target.value )}
           />
         </div>
       </div>
@@ -35,7 +35,7 @@ function LoginForm({ onLogin }) {
         </label>
         <div className="control">
           <input className="input" type="password" required value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={( event ) => setPassword( event.target.value )}
           />
         </div>
       </div>

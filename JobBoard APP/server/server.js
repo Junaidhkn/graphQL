@@ -53,4 +53,7 @@ const { url } = await startStandaloneServer( server, {
   listen: { port: PORT },
 } );
 
+app.listen( '8000', () => {
+  console.log( '🚀  Express Server ready at PORT 8000 ' );
+} )
 console.log( `🚀  Server ready at: ${url}` );

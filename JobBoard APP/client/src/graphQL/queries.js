@@ -50,6 +50,10 @@ query CompanyQuery($id:ID!){
   company(id:$id ) {
     name
     description
+    jobs{
+      id
+      title
+    }
   }
   }
 

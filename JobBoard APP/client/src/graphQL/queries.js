@@ -48,7 +48,6 @@ export const getCompany = async ( id ) => {
   const query = gql`
 query CompanyQuery($id:ID!){
   company(id:$id ) {
-    id
     name
     description
   }

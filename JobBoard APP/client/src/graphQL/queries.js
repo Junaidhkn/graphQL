@@ -4,21 +4,21 @@ const GRAPHQL_URL = 'http://localhost:9000/'
 
 export const getJobs = async () => {
 
-   const query = gql`
+  const query = gql`
    query {
   jobs {
     id
     title
     description
     company {
-      id
+      name
     }
   }
 }
 
 `
-   const data = await request( GRAPHQL_URL, query )
-   console.log( data );
+  const { jobs } = await request( GRAPHQL_URL, query )
 
+  return jobs
 
 }

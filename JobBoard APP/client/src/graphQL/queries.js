@@ -6,7 +6,18 @@ const GRAPHQL_URL = 'http://localhost:9000/'
 
 const client = new ApolloClient( {
   uri: GRAPHQL_URL,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  // defaultOptions: {
+  //   query: {
+  //     fetchPolicy: 'network-only'
+  //   },
+  //   mutate: {
+  //     fetchPolicy: 'network-only'
+  //   },
+  //   watchQuery: {
+  //     fetchPolicy: 'network-only'
+  //   }
+  // }
 } )
 
 export const getJobs = async () => {
@@ -18,13 +29,14 @@ export const getJobs = async () => {
     title
     description
     company {
+      id
       name
     }
   }
 }
 
 `
-  const { data: { jobs } } = await client.query( { query } )
+  const { data: { jobs } } = await client.query( { query, fetchPolicy: 'network-only' } )
 
   // const { jobs } = await request( GRAPHQL_URL, query )
 
@@ -86,7 +98,7 @@ query CompanyQuery($id:ID!){
 
 export const createJob = async ( input ) => {
 
-  const query = gql`
+  const mutation = gql`
 mutation CreateJobMutation($input:CreateJobInput!){
   job:createJob(input:$input) {
     id
@@ -96,7 +108,14 @@ mutation CreateJobMutation($input:CreateJobInput!){
 `
   const variables = { input }
   const headers = { 'Authorization': 'Bearer ' + getAccessToken() }
-  const { job } = await request( GRAPHQL_URL, query, variables, headers )
+
+  const context = {
+    headers
+  }
+
+  const { data: { job } } = await client.mutate( { mutation, variables, context } )
+
+  // const { job } = await request( GRAPHQL_URL, mutation, variables, headers )
   return job
 
 }

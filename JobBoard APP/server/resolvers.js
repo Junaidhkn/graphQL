@@ -9,7 +9,6 @@ export const resolvers = {
 
 	Mutation: {
 		createJob: ( _root, { input }, context ) => {
-			console.log( context );
 			if ( !context.user ) {
 				throw new Error( 'Unauthourized' )
 			}

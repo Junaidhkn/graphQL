@@ -1,12 +1,18 @@
-import { request, gql } from 'graphql-request'
+import { request } from 'graphql-request'
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
 import { getAccessToken } from '../auth.js'
 
 const GRAPHQL_URL = 'http://localhost:9000/'
 
+const client = new ApolloClient( {
+  uri: GRAPHQL_URL,
+  cache: new InMemoryCache()
+} )
+
 export const getJobs = async () => {
 
   const query = gql`
-   query {
+   query JobsQuery{
   jobs {
     id
     title
@@ -18,7 +24,9 @@ export const getJobs = async () => {
 }
 
 `
-  const { jobs } = await request( GRAPHQL_URL, query )
+  const { data: { jobs } } = await client.query( { query } )
+
+  // const { jobs } = await request( GRAPHQL_URL, query )
 
   return jobs
 

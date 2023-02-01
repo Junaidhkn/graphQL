@@ -30,6 +30,7 @@ app.post( '/login', async ( req, res ) => {
 } );
 
 const typeDefs = await readFile( './schema.graphql', 'utf-8' );
+
 const context = async ( { req } ) => {
   if ( req.auth ) {
     const user = await User.findById( req.auth.sub );

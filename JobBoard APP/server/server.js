@@ -1,5 +1,4 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import http from 'http';
@@ -34,13 +33,13 @@ app.post( '/login', async ( req, res ) => {
 
 const typeDefs = await readFile( './schema.graphql', 'utf-8' );
 
-// const context = async ( { req } ) => {
-//   if ( req.auth ) {
-//     const user = await User.findById( req.auth.sub );
-//     return { user };
-//   }
-//   return {};
-// };
+const context = async ( { req } ) => {
+  if ( req.auth ) {
+    const user = await User.findById( req.auth.sub );
+    return { user };
+  }
+  return {};
+};
 
 const httpServer = http.createServer( app );
 
@@ -59,15 +58,9 @@ app.use(
   // expressMiddleware accepts the same arguments:
   // an Apollo Server instance and optional configuration options
   expressMiddleware( server, {
-    context: async ( { req } ) => {
-      if ( req.auth ) {
-        const user = await User.findById( req.auth.sub );
-        return { user };
-      }
-      return {};
-    }
-  } ),
-);
+    context: context
+  }
+  ) )
 
 
 await new Promise( ( resolve ) => httpServer.listen( { port: 9000 }, resolve ) );

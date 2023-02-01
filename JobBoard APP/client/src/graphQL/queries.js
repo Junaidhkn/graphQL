@@ -102,6 +102,12 @@ export const createJob = async ( input ) => {
 mutation CreateJobMutation($input:CreateJobInput!){
   job:createJob(input:$input) {
     id
+    title
+    description
+    company {
+      id
+      name
+    }
   }
 }
 

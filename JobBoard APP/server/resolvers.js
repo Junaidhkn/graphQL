@@ -8,8 +8,12 @@ export const resolvers = {
 	},
 
 	Mutation: {
-		createJob: ( _root, { input } ) => {
-			return Job.create( input )
+		createJob: ( _root, { input }, context ) => {
+			console.log( context );
+			if ( !context.user ) {
+				throw new Error( 'Unauthourized' )
+			}
+			return Job.create( { ...input, companyId: context.user.companyId } )
 		},
 		deleteJob: ( _root, { id } ) => {
 			return Job.delete( id )

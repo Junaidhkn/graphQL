@@ -95,21 +95,27 @@ query CompanyQuery($id:ID!){
 
 }
 
-
-export const createJob = async ( input ) => {
-
-  const mutation = gql`
-mutation CreateJobMutation($input:CreateJobInput!){
-  job:createJob(input:$input) {
-    id
+const JOB_DETAIL_FRAGENT = gql`
+fragment JobDetail on Job{
+  id
     title
     description
     company {
       id
       name
     }
+}
+`
+
+export const createJob = async ( input ) => {
+
+  const mutation = gql`
+mutation CreateJobMutation($input:CreateJobInput!){
+  job:createJob(input:$input) {
+    ...JobDetail
   }
 }
+${JOB_DETAIL_FRAGENT}
 
 `
   const variables = { input }

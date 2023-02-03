@@ -3,7 +3,7 @@
 // better security
 
 const ACCESS_TOKEN_KEY = 'accessToken';
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:9000';
 
 export function getAccessToken () {
   return localStorage.getItem( ACCESS_TOKEN_KEY );

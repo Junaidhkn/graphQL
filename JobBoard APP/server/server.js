@@ -63,7 +63,7 @@ app.use(
   ) )
 
 
-await new Promise( ( resolve ) => httpServer.listen( { port: 9000 }, resolve ) );
+await new Promise( ( resolve ) => app.listen( { port: 9000 }, resolve ) );
 console.log( `🚀 Server ready at http://localhost:9000/` );
 
 // const server = new ApolloServer( {

@@ -119,7 +119,18 @@ mutation CreateJobMutation($input:CreateJobInput!){
     headers
   }
 
-  const { data: { job } } = await client.mutate( { mutation, variables, context } )
+  const { data: { job } } = await client.mutate( {
+    mutation,
+    variables,
+    context,
+    update: ( cache, { data: { job } } ) => {
+      cache.writeQuery( {
+        query: job,
+        variables: { id: job.id },
+        data: { job }
+      } )
+    }
+  } )
 
   // const { job } = await request( GRAPHQL_URL, mutation, variables, headers )
   return job

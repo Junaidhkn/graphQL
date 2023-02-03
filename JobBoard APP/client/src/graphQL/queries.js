@@ -20,6 +20,22 @@ export const client = new ApolloClient( {
   // }
 } )
 
+
+export const JOBS_QUERY = gql`
+   query JobsQuery{
+  jobs {
+    id
+    title
+    description
+    company {
+      id
+      name
+    }
+  }
+}
+
+`
+
 export const getJobs = async () => {
 
   const query = gql`

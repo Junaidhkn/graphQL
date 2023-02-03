@@ -4,6 +4,23 @@ import { useQuery } from '@apollo/client';
 
 
 function JobBoard () {
+
+
+  //  const JOBS_QUERY = gql`
+  //    query JobsQuery{
+  //   jobs {
+  //     id
+  //     title
+  //     description
+  //     company {
+  //       id
+  //       name
+  //     }
+  //   }
+  // }
+
+  // `
+
   const { data, loading, error } = useQuery( JOBS_QUERY, {
     fetchPolicy: 'network-only'
   } )

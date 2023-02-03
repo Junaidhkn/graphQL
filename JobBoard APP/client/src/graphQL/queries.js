@@ -36,29 +36,29 @@ export const JOBS_QUERY = gql`
 
 `
 
-export const getJobs = async () => {
+// export const getJobs = async () => {
 
-  const query = gql`
-   query JobsQuery{
-  jobs {
-    id
-    title
-    description
-    company {
-      id
-      name
-    }
-  }
-}
+//   const query = gql`
+//    query JobsQuery{
+//   jobs {
+//     id
+//     title
+//     description
+//     company {
+//       id
+//       name
+//     }
+//   }
+// }
 
-`
-  const { data: { jobs } } = await client.query( { query, fetchPolicy: 'network-only' } )
+// `
+//   const { data: { jobs } } = await client.query( { query, fetchPolicy: 'network-only' } )
 
-  // const { jobs } = await request( GRAPHQL_URL, query )
+//   // const { jobs } = await request( GRAPHQL_URL, query )
 
-  return jobs
+//   return jobs
 
-}
+// }
 
 
 

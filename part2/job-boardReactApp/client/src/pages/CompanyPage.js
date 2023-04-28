@@ -1,18 +1,10 @@
 import { useParams } from 'react-router';
-import JobList from '../components/JobList';
-import { useCompany } from '../lib/graphql/hooks';
+import { companies } from '../lib/fake-data';
 
 function CompanyPage() {
   const { companyId } = useParams();
-  const { company, loading, error } = useCompany(companyId);
 
-  console.log('[CompanyPage]', { company, loading, error });
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div className="has-text-danger">Data unavailable</div>;
-  }
+  const company = companies.find((company) => company.id === companyId);
   return (
     <div>
       <h1 className="title">
@@ -21,10 +13,6 @@ function CompanyPage() {
       <div className="box">
         {company.description}
       </div>
-      <h2 className="title is-5">
-        Jobs at {company.name}
-      </h2>
-      <JobList jobs={company.jobs} />
     </div>
   );
 }

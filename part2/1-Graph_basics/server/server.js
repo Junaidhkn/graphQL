@@ -18,6 +18,12 @@ const resolvers = {
   },
 };
 
+
+// Passing an ApolloServer instance to the `startStandaloneServer` function:
+//  1. creates an Express app
+//  2. installs your ApolloServer instance as middleware
+//  3. prepares your app to handle incoming requests
+
 const server = new ApolloServer( { typeDefs, resolvers } );
 const { url } = await startStandaloneServer( server, { listen: { port: 9000 } } );
-console.log( `Server running at ${url}` );
+console.log( `🚀  Server ready at: ${url}` );

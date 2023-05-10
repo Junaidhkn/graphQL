@@ -1,14 +1,38 @@
 import cors from 'cors';
 import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import http from 'http';
+
 import { authMiddleware, handleLogin } from './auth.js';
 
-const PORT = 9000;
 
 const app = express();
-app.use(cors(), express.json(), authMiddleware);
+app.use( cors(), express.json(), authMiddleware );
 
-app.post('/login', handleLogin);
+app.post( '/login', handleLogin );
 
-app.listen({ port: PORT }, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+const httpServer = http.createServer( app );
+
+const server = new ApolloServer( {
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer( { httpServer } )],
+} );
+
+await server.start();
+
+app.use(
+  '/',
+  cors(),
+  bodyParser.json(),
+  expressMiddleware( server, {
+    context: async ( { req } ) => ( { token: req.headers.token } ),
+  } ),
+);
+
+// Modified server startup
+await new Promise( ( resolve ) => httpServer.listen( { port: 9000 }, resolve ) );
+console.log( `🚀 Server ready at http://localhost:9000/` );

@@ -1,4 +1,5 @@
-export const getUsers = () => connection.table( 'user' );
+export const getUsers = () => {
+};
 
 export async function getUser ( id ) {
   return await getUserTable().first().where( { id } );

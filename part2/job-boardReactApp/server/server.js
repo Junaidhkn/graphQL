@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import { authMiddleware, handleLogin } from './auth.js';
 import { readFile } from 'fs/promises';
 import { resolvers } from './resolvers.js';
+import { createContext } from './prisma/context.js';
 
 
 const app = express();
@@ -33,7 +34,7 @@ app.use(
   cors(),
   bodyParser.json(),
   expressMiddleware( server, {
-    context: async ( { req } ) => ( { token: req.headers.token } ),
+    context: createContext,
   } ),
 );
 

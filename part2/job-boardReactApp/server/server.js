@@ -6,6 +6,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import http from 'http';
 
 import { authMiddleware, handleLogin } from './auth.js';
+import { readFile } from 'fs/promises';
 
 
 const app = express();
@@ -13,6 +14,7 @@ app.use( cors(), express.json(), authMiddleware );
 
 app.post( '/login', handleLogin );
 
+const typeDefs = await readFile( './schema.graphql', 'utf-8' );
 
 const httpServer = http.createServer( app );
 

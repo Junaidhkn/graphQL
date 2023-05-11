@@ -1,5 +1,11 @@
 export const resolvers = {
    Query: {
-      greeting: () => 'Hello GraphQL World!'
+      job: () => {
+         return {
+            title: 'Software Engineer',
+            company: 'Google',
+            description: "Best job ever"
+         }
+      }
    }
 }

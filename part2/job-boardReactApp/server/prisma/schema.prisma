@@ -15,7 +15,7 @@ model Job {
   createdAt   DateTime @default(now())
 }
 
-model Comapany {
+model Company {
   id          String @id @default(uuid())
   name        String
   description String

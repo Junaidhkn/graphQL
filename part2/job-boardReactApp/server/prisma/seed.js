@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 const userData = [
 	{
@@ -57,19 +57,18 @@ async function main () {
 		const user = await prisma.user.create( {
 			data: i,
 		} );
-		console.log( 'User Data Saved' );
+		return user
 	}
 	for ( const j of companyData ) {
-		const company = await prisma.comapany.create( {
+		const company = await prisma.company.create( {
 			data: j,
 		} );
-		console.log( 'Comapany Data Saved' );
+		return company
 	}
 	for ( const k of jobData ) {
 		const job = await prisma.job.create( {
 			data: k,
 		} );
-		console.log( 'Job Data Saved' );
 	}
 }
 

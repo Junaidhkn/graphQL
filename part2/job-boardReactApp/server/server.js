@@ -34,7 +34,7 @@ app.use(
   cors(),
   bodyParser.json(),
   expressMiddleware( server, {
-    context: createContext,
+    context: async ( { req } ) => ( { token: req.headers.token } ),
   } ),
 );
 

@@ -13,12 +13,14 @@ model Job {
   companyId   String
   description String
   createdAt   DateTime @default(now())
+  company     Company  @relation(fields: [companyId], references: [id])
 }
 
 model Company {
   id          String @id @default(uuid())
   name        String
   description String
+  jobs        Job[]
 }
 
 model User {

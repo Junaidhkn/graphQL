@@ -9,3 +9,16 @@ type Job {
 	date: String!
 	description: String
 }
+
+type Company {
+	id: ID!
+	name: String!
+	description: String
+}
+
+type User {
+	id: ID!
+	companyId: String!
+	email: String!
+	password: String!
+}

@@ -1,5 +1,9 @@
-export const getCompanies = () => { };
+import { prisma } from "../seed.js";
+
+export const getCompanies = async () => {
+  return await prisma.company.findMany()
+};
 
 export async function getCompany ( id ) {
-  return await getCompanyTable().first().where( { id } );
+  return await prisma.company.findUnique( { where: { id } } );
 }

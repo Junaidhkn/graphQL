@@ -11,6 +11,8 @@ type Job {
 	description: String
 }
 
+#  Kindly note that in schema.prisma the job and company has one-to-many relationship defined thus check later, it its nessary to define it
+
 type Company {
 	id: ID!
 	name: String!

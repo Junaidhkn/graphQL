@@ -10,8 +10,14 @@ export async function getJob ( id ) {
 }
 
 
-export async function createJob ( data ) {
-  return await prisma.job.create( { data } );
+export async function createJob ( { campanyId, title, description } ) {
+  return await prisma.job.create( {
+    data: {
+      campanyId,
+      title,
+      description
+    }
+  } );
 };
 
 export async function deleteJob ( id ) {

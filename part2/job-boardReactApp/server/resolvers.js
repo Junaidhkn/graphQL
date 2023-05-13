@@ -1,9 +1,9 @@
-import { prisma } from "./seed.js";
+import { getJobs } from "./db/jobs.js"
 
 export const resolvers = {
    Query: {
       jobs: async () => {
-         return await prisma.job.findMany();
+         return await getJobs()
       }
    }
 }

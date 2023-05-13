@@ -6,5 +6,6 @@ type Job {
 	id: ID!
 	title: String!
 	companyId: String!
+	date: String!
 	description: String
 }

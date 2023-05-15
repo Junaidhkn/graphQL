@@ -9,6 +9,7 @@ export const getJobs = async () => {
    query{
       jobs{
          id
+         title
          date
          company{
             id

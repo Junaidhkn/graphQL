@@ -1,9 +1,17 @@
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../lib/formatters';
+import { useEffect, useState } from 'react';
+import { getJob } from '../lib/graphql/queries.js';
+
 
 function JobPage () {
   const { jobId } = useParams();
+  const [job, setJob] = useState();
+  useEffect( () => {
+    getJob( jobId ).then( job => { setJob( job ) } )
+  }, [jobId] )
+  console.log( job );
   return (
     <div>
       <h1 className="title is-2">

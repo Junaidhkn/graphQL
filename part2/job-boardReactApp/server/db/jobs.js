@@ -6,7 +6,11 @@ export async function getJobs () {
 }
 
 export async function getJob ( id ) {
-  return await prisma.job.findUnique( { where: { id } } );
+  const job = await prisma.job.findUnique( { where: { id } } )
+  if ( !job ) {
+    return 'Job not Found'
+  }
+  return job
 }
 
 

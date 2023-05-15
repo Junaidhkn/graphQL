@@ -1,12 +1,9 @@
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../lib/formatters';
-import { jobs } from '../lib/fake-data';
 
-function JobPage() {
+function JobPage () {
   const { jobId } = useParams();
-
-  const job = jobs.find((job) => job.id === jobId);
   return (
     <div>
       <h1 className="title is-2">
@@ -19,7 +16,7 @@ function JobPage() {
       </h2>
       <div className="box">
         <div className="block has-text-grey">
-          Posted: {formatDate(job.date, 'long')}
+          Posted: {formatDate( job.date, 'long' )}
         </div>
         <p className="block">
           {job.description}

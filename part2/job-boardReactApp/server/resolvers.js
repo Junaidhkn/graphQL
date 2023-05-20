@@ -12,7 +12,7 @@ export const resolvers = {
          return job.createdAt.toISOString().slice( 0, 'yyyy-mm-dd'.length )
       },
       company: ( job ) => {
-         return getCompany( job.id, job.companyId )
+         return getCompany( job.companyId )
       }
    },
    Company: {

@@ -13,20 +13,19 @@ export async function getJob ( id ) {
   return job
 }
 
-export async function getJobsByCompany ( id, companyId ) {
-  const job = await prisma.job.findUnique( {
+//function to get jobs by companyId
+
+export async function getJobsByCompany ( id ) {
+  const jobs = await prisma.job.findMany( {
     where: {
-      id
+      companyId: id
     }
   } )
-
   if ( !jobs ) {
     return 'Jobs not Found'
   }
-  console.log( jobs );
   return jobs
 }
-
 
 export async function createJob ( { campanyId, title, description } ) {
   return await prisma.job.create( {

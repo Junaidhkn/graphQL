@@ -5,6 +5,7 @@ export const resolvers = {
    Query: {
       job: ( _root, args ) => getJob( args.id ),
       jobs: () => getJobs(),
+      company: ( _root, args ) => getCompany( args.id )
    },
    Job: {
       date: ( job ) => {

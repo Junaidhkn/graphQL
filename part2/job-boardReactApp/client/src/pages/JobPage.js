@@ -12,7 +12,7 @@ function JobPage () {
     getJob( jobId ).then( jobById => { setJob( jobById ) } )
   }, [jobId] )
 
-  if ( !job ) return 'Loading...';
+  if ( !job ) return <h1>Loading...</h1>
 
 
   return (

@@ -10,6 +10,7 @@ export async function getJob ( id ) {
   if ( !job ) {
     return 'Job not Found'
   }
+  console.log( job );
   return job
 }
 

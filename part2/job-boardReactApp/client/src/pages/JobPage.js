@@ -9,9 +9,10 @@ function JobPage () {
   const { jobId } = useParams();
   const [job, setJob] = useState();
   useEffect( () => {
-    getJob( jobId ).then( job => { setJob( job ) } )
+    getJob( jobId ).then( jobById => { setJob( jobById ) } )
   }, [jobId] )
-  console.log( job );
+
+  if ( !job ) return 'Loading...';
   return (
     <div>
       <h1 className="title is-2">

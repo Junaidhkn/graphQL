@@ -13,6 +13,8 @@ function JobPage () {
   }, [jobId] )
 
   if ( !job ) return 'Loading...';
+
+
   return (
     <div>
       <h1 className="title is-2">

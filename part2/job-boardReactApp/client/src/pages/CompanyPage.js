@@ -43,7 +43,7 @@ function CompanyPage () {
       </h2>
       <JobList jobs={company.jobs} />
     </div>
-  );
+  )
 }
 
 export default CompanyPage;

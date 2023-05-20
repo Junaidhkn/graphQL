@@ -7,7 +7,9 @@ function CompanyPage () {
   const { companyId } = useParams();
   const [company, setCompany] = useState();
   useEffect( () => {
-    getCompany( companyId ).then( companyById => { setCompany( companyById ) } )
+    getCompany( companyId ).then( companyById => {
+      setCompany( companyById )
+    } )
   }, [companyId, setCompany] )
 
   if ( !company ) return <h1>Loading...</h1>

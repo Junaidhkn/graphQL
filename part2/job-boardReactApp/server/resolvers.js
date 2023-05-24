@@ -16,7 +16,7 @@ export const resolvers = {
       },
       jobs: () => getJobs(),
       company: async ( _root, args ) => {
-         const company = getCompany( args.id )
+         const company = await getCompany( args.id )
          if ( !company ) {
             throw new GraphQLError( `Company with id ${args.id} not found`, {
                extensions: { code: 'NOT_FOUND' }

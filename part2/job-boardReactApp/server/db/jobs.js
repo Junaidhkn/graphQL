@@ -27,10 +27,10 @@ export async function getJobsByCompany ( id ) {
   return jobs
 }
 
-export async function createJob ( { campanyId, title, description } ) {
+export async function createJob ( { companyId, title, description } ) {
   const job = await prisma.job.create( {
     data: {
-      campanyId,
+      companyId,
       title,
       description
     }

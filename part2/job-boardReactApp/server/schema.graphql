@@ -5,9 +5,9 @@ type Query {
 }
 
 type Mutation {
-	createJob(title: String!, companyId: String, description: String): Job
-	createCompany(name: String!, description: String): Company
-	createUser(email: String!, password: String!): User
+	createJob(input: CreateJobInput): Job
+	createCompany(input: CreateCompanyInput): Company
+	createUser(input: CreateUserInput): User
 }
 
 type Job {
@@ -31,6 +31,22 @@ type Company {
 type User {
 	id: ID!
 	companyId: String!
+	email: String!
+	password: String!
+}
+
+input CreateJobInput {
+	title: String!
+	companyId: String
+	description: String
+}
+
+input CreateCompanyInput {
+	name: String!
+	description: String
+}
+
+input CreateUserInput {
 	email: String!
 	password: String!
 }

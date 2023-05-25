@@ -29,7 +29,7 @@ export const resolvers = {
    Mutation: {
       createJob: ( _root, args ) => {
          const companyId = 'FjcJCHJALA4i'
-         const { title, description } = args
+         const { title, description } = args.input
          return createJob( { companyId, title, description } )
       }
    },

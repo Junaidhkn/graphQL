@@ -1,7 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request'
 
 
-const client = new GraphQLClient( 'http://localhost:9000/' );
+export const client = new GraphQLClient( 'http://localhost:9000/' );
 
 
 export const getJobs = async () => {

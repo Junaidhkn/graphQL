@@ -1,12 +1,18 @@
 import { useState } from 'react';
+import { createJob } from '../lib/graphql/mutations.js';
+import { useNavigate } from 'react-router';
 
-function CreateJobPage() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+function CreateJobPage () {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState( '' );
+  const [description, setDescription] = useState( '' );
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async ( event ) => {
     event.preventDefault();
-    console.log('should post a new job:', { title, description });
+    const job = await createJob( { title, description } );
+    setTitle( '' );
+    setDescription( '' );
+    navigate( `/jobs/${job.id}` )
   };
 
   return (
@@ -22,7 +28,7 @@ function CreateJobPage() {
             </label>
             <div className="control">
               <input className="input" type="text" value={title}
-                onChange={(event) => setTitle(event.target.value)}
+                onChange={( event ) => setTitle( event.target.value )}
               />
             </div>
           </div>
@@ -32,7 +38,7 @@ function CreateJobPage() {
             </label>
             <div className="control">
               <textarea className="textarea" rows={10} value={description}
-                onChange={(event) => setDescription(event.target.value)}
+                onChange={( event ) => setDescription( event.target.value )}
               />
             </div>
           </div>

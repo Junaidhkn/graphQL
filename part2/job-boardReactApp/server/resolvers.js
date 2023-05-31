@@ -46,9 +46,13 @@ export const resolvers = {
          }
          return deleteJob( args.id, context.user.companyId )
       },
-      updateJob: ( _root, args ) => {
-         // const { id, title, description } = args.input
-         return updateJob( args.input )
+      updateJob: ( _root, args, context ) => {
+         if ( !context.user ) {
+            throw new GraphQLError( `Not Authorized`, {
+               extensions: { code: 'UNAUTHORIZED' }
+            } )
+         }
+         return updateJob( args.input, context.user.companyId )
       },
       createUser: ( _root, args ) => {
          return createUser( args.input )

@@ -50,7 +50,7 @@ export async function deleteJob ( id, companyId ) {
 export async function updateJob ( { id, title, description }, companyId ) {
   const job = await prisma.job.findUnique( { where: { id, companyId } } );
   if ( !job ) {
-    throw new Error( `Job not found: ${id}` );
+    throw new Error( `Job not found: ${id} and ${companyId}` );
   }
   const updatedFields = { title, description };
   await prisma.job.update( { where: { id }, data: updatedFields } );

@@ -9,6 +9,7 @@ type Mutation {
 	createCompany(input: CreateCompanyInput): Company
 	createUser(input: CreateUserInput): User
 	deleteJob(id: ID!): Job
+	updateJob(input: UpdateJobInput): Job
 }
 
 type Job {
@@ -39,6 +40,12 @@ type User {
 input CreateJobInput {
 	title: String!
 	companyId: String
+	description: String
+}
+
+input UpdateJobInput {
+	title: String!
+	id: String!
 	description: String
 }
 

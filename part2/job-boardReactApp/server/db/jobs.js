@@ -48,7 +48,7 @@ export async function deleteJob ( id ) {
 }
 
 export async function updateJob ( { id, title, description } ) {
-  const job = await prisma.job.findUnique.where( { id } );
+  const job = await prisma.job.findUnique( { where: { id } } );
   if ( !job ) {
     throw new Error( `Job not found: ${id}` );
   }

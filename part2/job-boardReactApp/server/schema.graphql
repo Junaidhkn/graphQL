@@ -8,6 +8,7 @@ type Mutation {
 	createJob(input: CreateJobInput): Job
 	createCompany(input: CreateCompanyInput): Company
 	createUser(input: CreateUserInput): User
+	deleteJob(id: ID!): Job
 }
 
 type Job {

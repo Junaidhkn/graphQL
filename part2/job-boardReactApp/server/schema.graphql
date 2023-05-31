@@ -55,6 +55,7 @@ input CreateCompanyInput {
 }
 
 input CreateUserInput {
+	companyId: String!
 	email: String!
 	password: String!
 }

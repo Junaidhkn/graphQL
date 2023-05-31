@@ -2,6 +2,7 @@ import { GraphQLError } from 'graphql';
 
 import { createJob, deleteJob, getJob, getJobs, getJobsByCompany, updateJob } from "./db/jobs.js"
 import { getCompany } from "./db/companies.js"
+import { createUser } from './db/users.js';
 
 export const resolvers = {
    Query: {
@@ -28,10 +29,15 @@ export const resolvers = {
    },
 
    Mutation: {
-      createJob: ( _root, args ) => {
-         const companyId = 'FjcJCHJALA4i'
+      createJob: ( _root, args, context ) => {
+         console.log( context );
+         if ( !context.user ) {
+            throw new GraphQLError( `Not Authorized`, {
+               extensions: { code: 'UNAUTHORIZED' }
+            } )
+         }
          const { title, description } = args.input
-         return createJob( { companyId, title, description } )
+         return createJob( { companyId: context.user.companyId, title, description } )
       },
       deleteJob: ( _root, args ) => {
          return deleteJob( args.id )
@@ -39,6 +45,9 @@ export const resolvers = {
       updateJob: ( _root, args ) => {
          // const { id, title, description } = args.input
          return updateJob( args.input )
+      },
+      createUser: ( _root, args ) => {
+         return createUser( args.input )
       }
    },
 

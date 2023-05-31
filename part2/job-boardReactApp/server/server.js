@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import { authMiddleware, handleLogin } from './auth.js';
 import { readFile } from 'fs/promises';
 import { resolvers } from './resolvers.js';
+import { getUser } from './db/users.js';
 
 
 const app = express();
@@ -28,12 +29,20 @@ const server = new ApolloServer( {
 
 await server.start();
 
+const getContext = async ( { req } ) => {
+  if ( req.auth ) {
+    const user = await getUser( req.auth.sub )
+    return { auth: req.auth, user }
+  }
+  return {}
+}
+
 app.use(
   '/',
   cors(),
   bodyParser.json(),
   expressMiddleware( server, {
-    context: async ( { req } ) => ( { token: req.headers.token } ),
+    context: getContext,
   } ),
 );
 

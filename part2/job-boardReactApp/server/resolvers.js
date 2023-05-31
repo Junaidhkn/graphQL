@@ -30,7 +30,6 @@ export const resolvers = {
 
    Mutation: {
       createJob: ( _root, args, context ) => {
-         console.log( context );
          if ( !context.user ) {
             throw new GraphQLError( `Not Authorized`, {
                extensions: { code: 'UNAUTHORIZED' }
@@ -39,8 +38,13 @@ export const resolvers = {
          const { title, description } = args.input
          return createJob( { companyId: context.user.companyId, title, description } )
       },
-      deleteJob: ( _root, args ) => {
-         return deleteJob( args.id )
+      deleteJob: ( _root, args, context ) => {
+         if ( !context.user ) {
+            throw new GraphQLError( `Not Authorized`, {
+               extensions: { code: 'UNAUTHORIZED' }
+            } )
+         }
+         return deleteJob( args.id, context.user.companyId )
       },
       updateJob: ( _root, args ) => {
          // const { id, title, description } = args.input

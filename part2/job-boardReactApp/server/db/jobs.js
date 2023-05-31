@@ -38,8 +38,8 @@ export async function createJob ( { companyId, title, description } ) {
   return job;
 };
 
-export async function deleteJob ( id ) {
-  const job = await prisma.job.findUnique.where( { id } );
+export async function deleteJob ( id, companyId ) {
+  const job = await prisma.job.findUnique.where( { id, companyId } );
   if ( !job ) {
     throw new Error( `Job not found: ${id}` );
   }

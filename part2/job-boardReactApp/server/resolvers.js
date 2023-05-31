@@ -38,21 +38,33 @@ export const resolvers = {
          const { title, description } = args.input
          return createJob( { companyId: context.user.companyId, title, description } )
       },
-      deleteJob: ( _root, args, context ) => {
+      deleteJob: async ( _root, args, context ) => {
          if ( !context.user ) {
             throw new GraphQLError( `Not Authorized`, {
                extensions: { code: 'UNAUTHORIZED' }
             } )
          }
-         return deleteJob( args.id, context.user.companyId )
+         const job = await deleteJob( args.id, context.user.companyId )
+         if ( !job ) {
+            throw new GraphQLError( `Company with id ${job.id} not found`, {
+               extensions: { code: 'NOT_FOUND' }
+            } )
+         }
+         return job
       },
-      updateJob: ( _root, args, context ) => {
+      updateJob: async ( _root, args, context ) => {
          if ( !context.user ) {
             throw new GraphQLError( `Not Authorized`, {
                extensions: { code: 'UNAUTHORIZED' }
             } )
          }
-         return updateJob( args.input, context.user.companyId )
+         const updatedJob = await updateJob( args.input, context.user.companyId )
+         if ( !updatedJob ) {
+            throw new GraphQLError( `Company with id ${job.id} not found`, {
+               extensions: { code: 'NOT_FOUND' }
+            } )
+         }
+         return updatedJob
       },
       createUser: ( _root, args ) => {
          return createUser( args.input )

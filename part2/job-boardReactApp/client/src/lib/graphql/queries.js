@@ -38,39 +38,39 @@ export const getJobs = async () => {
 }
 
 
-// export const getJob = async ( id ) => {
-//    const query = gql`
-//    query JobById ($id:ID!){
-//       job(id:$id) {
-//          date
-//          title
-//          description
-//       company {
-//          name
-//          id
-//     }
-//   }
-//    }
-//    `
-//    const { job } = await client.request( query, { id } );
-//    return job;
-// }
+export const getJob = async ( id ) => {
+   const query = gql`
+   query JobById ($id:ID!){
+      job(id:$id) {
+         date
+         title
+         description
+      company {
+         name
+         id
+    }
+  }
+   }
+   `
+   const { data } = await client.query( { query, variables: { id } } );
+   return data.job;
+}
 
-// export const getCompany = async ( id ) => {
-//    const query = gql`
-//    query ComapanyById ($id:ID!){
-//       company(id:$id) {
-//          id
-//          name
-//          description
-//          jobs{
-//             id
-//             date
-//             title
-//          }
-//   }
-//    }
-//    `
-//    const { company } = await client.request( query, { id } );
-//    return company;
-// }
+export const getCompany = async ( id ) => {
+   const query = gql`
+   query ComapanyById ($id:ID!){
+      company(id:$id) {
+         id
+         name
+         description
+         jobs{
+            id
+            date
+            title
+         }
+  }
+   }
+   `
+   const { data } = await client.query( { query, variables: { id } } );
+   return data.company;
+}

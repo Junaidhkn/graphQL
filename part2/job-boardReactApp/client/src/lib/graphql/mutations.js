@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from '@apollo/client';
 import { client } from './queries.js';
 
 
@@ -13,6 +13,9 @@ export const createJob = async ( { title, description } ) => {
       }
    `
 
-   const { job } = await client.request( mutation, { input: { title, description } } );
-   return job;
+   const { data } = await client.mutate( {
+      mutation,
+      variables: { input: { title, description } }
+   } );
+   return data.job;
 }

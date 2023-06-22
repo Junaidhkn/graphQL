@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache, concat, createHttpLink, gql } from '@apollo/client';
 import { getAccessToken } from '../auth.js';
 
 
@@ -14,14 +14,30 @@ import { getAccessToken } from '../auth.js';
 //    }
 // } );
 
-export const client = new ApolloClient( {
+const httpLink = createHttpLink( {
    uri: 'http://localhost:9000/',
-   cache: new InMemoryCache()
 } )
+const authMiddleware = new ApolloLink( ( operation, forward ) => {
+   // add the authorization to the headers
+   const accessToken = getAccessToken();
+   operation.setContext( {
+      headers: {
+         authorization: accessToken ? `Bearer ${accessToken}` : "",
+      },
+   } );
+   return forward( operation );
+} );
+
+
+export const client = new ApolloClient( {
+   link: concat( authMiddleware, httpLink ),
+   cache: new InMemoryCache(),
+} );
+
 
 export const getJobs = async () => {
    const query = gql`
-   query{
+   query Jobs{
       jobs{
          id
          title

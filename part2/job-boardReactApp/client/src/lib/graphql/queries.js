@@ -54,9 +54,7 @@ export const getJobs = async () => {
    return data.jobs;
 }
 
-
-export const getJob = async ( id ) => {
-   const query = gql`
+export const jobByIdQuery = gql`
    query JobById ($id:ID!){
       job(id:$id) {
          date
@@ -69,7 +67,13 @@ export const getJob = async ( id ) => {
   }
    }
    `
-   const { data } = await client.query( { query, variables: { id } } );
+
+
+export const getJob = async ( id ) => {
+   const { data } = await client.query( {
+      query: jobByIdQuery,
+      variables: { id }
+   } );
    return data.job;
 }
 

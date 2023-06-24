@@ -90,22 +90,3 @@ export const companyByIdQuery = gql`
       }
    }
    }`
-
-export const getCompany = async ( id ) => {
-   const query = gql`
-   query ComapanyById ($id:ID!){
-      company(id:$id) {
-         id
-         name
-         description
-         jobs{
-            id
-            date
-            title
-         }
-  }
-   }
-   `
-   const { data } = await client.query( { query, variables: { id } } );
-   return data.company;
-}

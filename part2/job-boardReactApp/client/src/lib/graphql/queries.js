@@ -32,9 +32,7 @@ export const client = new ApolloClient( {
    }
 } );
 
-
-export const getJobs = async () => {
-   const query = gql`
+export const getJobsQuery = gql`
    query Jobs{
       jobs{
          id
@@ -46,13 +44,7 @@ export const getJobs = async () => {
          }
       }
    }
-   `
-   const { data } = await client.query( {
-      query,
-      fetchPolicy: 'network-only'
-   } )
-   return data.jobs;
-}
+`
 
 export const jobByIdQuery = gql`
    query JobById ($id:ID!){
@@ -68,14 +60,6 @@ export const jobByIdQuery = gql`
    }
    `
 
-
-export const getJob = async ( id ) => {
-   const { data } = await client.query( {
-      query: jobByIdQuery,
-      variables: { id }
-   } );
-   return data.job;
-}
 
 export const companyByIdQuery = gql`
    query ComapanyById( $id: ID! ){

@@ -1,4 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
+import { client } from './lib/graphql/queries.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Route, Routes } from 'react-router-dom';
@@ -9,7 +10,6 @@ import CreateJobPage from './pages/CreateJobPage';
 import HomePage from './pages/HomePage';
 import JobPage from './pages/JobPage';
 import LoginPage from './pages/LoginPage';
-import { client } from './lib/graphql/queries.js';
 
 function App () {
   const navigate = useNavigate();

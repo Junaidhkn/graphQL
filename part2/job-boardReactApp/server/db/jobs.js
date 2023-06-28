@@ -2,7 +2,7 @@ import { prisma } from "../seed.js";
 
 
 export async function getJobs () {
-  return await prisma.job.findMany();
+  return await prisma.job.findMany( { orderBy: { createdAt: 'desc' } } );
 }
 
 export async function getJob ( id ) {

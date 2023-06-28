@@ -1,8 +1,8 @@
 import { prisma } from "../seed.js";
 
 
-export async function getJobs () {
-  return await prisma.job.findMany( { orderBy: { createdAt: 'desc' } } );
+export async function getJobs ( limit ) {
+  return await prisma.job.findMany( { orderBy: { createdAt: 'desc' }, take: limit } );
 }
 
 export async function getJob ( id ) {

@@ -16,7 +16,7 @@ export const resolvers = {
          // Just a commit to test git
          return job
       },
-      jobs: ( _root, { limit } ) => getJobs( limit ),
+      jobs: ( _root, { limit, offset } ) => getJobs( limit, offset ),
       company: async ( _root, args ) => {
          const company = await getCompany( args.id )
          if ( !company ) {

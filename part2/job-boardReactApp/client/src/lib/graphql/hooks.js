@@ -10,9 +10,10 @@ export const useCompany = ( id ) => {
    return { company: data?.company, loading, error: Boolean( error ) }
 }
 
-export const useJobs = () => {
+export const useJobs = ( limit, offset ) => {
    const { data, loading, error } = useQuery( getJobsQuery, {
-      fetchPolicy: 'network-only'
+      fetchPolicy: 'network-only',
+      variables: { limit, offset }
    } )
    return { jobs: data?.jobs, loading, error: Boolean( error ) }
 }

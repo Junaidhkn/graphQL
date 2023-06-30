@@ -6,7 +6,8 @@ export async function getJobs ( limit, offset ) {
 }
 
 export const jobCount = async () => {
-  return await prisma.job.count()
+  const result = await prisma.job.count()
+  return result
 }
 
 export async function getJob ( id ) {

@@ -16,12 +16,15 @@ function HomePage () {
   if ( error ) {
     return <div className='has-text-danger'>Data requested is unavailable!!!!</div>
   }
+  console.log( jobs );
+  const totalPages = Math.ceil( jobs.totalCount / limit )
+  console.log( totalPages );
 
   const nextPage = () => {
     setCurrrentPage( currentPage + 1 )
   }
   const previousPage = () => {
-    if ( currentPage <= 1 ) {
+    if ( currentPage === 1 && currentPage === totalPages ) {
       return
     }
     setCurrrentPage( currentPage - 1 )
@@ -35,9 +38,9 @@ function HomePage () {
       <JobList jobs={jobs.jobItems} />
 
       <div>
-        <button className="button is-primary" onClick={previousPage}>Load Less</button>
-        <span>{currentPage}</span>
-        <button className="button is-primary" onClick={nextPage}>Load More</button>
+        <button disabled={currentPage === 1} className="button is-primary" onClick={previousPage}>Load Less</button>
+        <span>{currentPage} of {totalPages}</span>
+        <button disabled={currentPage === totalPages} className="button is-primary" onClick={nextPage}>Load More</button>
       </div>
     </div>
   );

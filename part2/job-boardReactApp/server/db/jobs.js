@@ -5,6 +5,10 @@ export async function getJobs ( limit, offset ) {
   return await prisma.job.findMany( { orderBy: { createdAt: 'desc' }, take: limit, skip: offset } );
 }
 
+export const jobCount = async () => {
+  return await prisma.job.count()
+}
+
 export async function getJob ( id ) {
   const job = await prisma.job.findUnique( { where: { id } } )
   if ( !job ) {

@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 
-import { createJob, deleteJob, getJob, getJobs, getJobsByCompany, updateJob } from "./db/jobs.js"
+import { createJob, deleteJob, getJob, getJobs, getJobsByCompany, jobCount, updateJob } from "./db/jobs.js"
 import { getCompany } from "./db/companies.js"
 import { createUser } from './db/users.js';
 
@@ -16,7 +16,11 @@ export const resolvers = {
          // Just a commit to test git
          return job
       },
-      jobs: ( _root, { limit, offset } ) => getJobs( limit, offset ),
+      jobs: async ( _root, { limit, offset } ) => {
+         const jobs = await getJobs( limit, offset )
+         const jobsCount = await jobCount()
+         return { jobs, jobsCount }
+      },
       company: async ( _root, args ) => {
          const company = await getCompany( args.id )
          if ( !company ) {

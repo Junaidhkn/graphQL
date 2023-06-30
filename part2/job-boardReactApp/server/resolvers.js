@@ -17,9 +17,9 @@ export const resolvers = {
          return job
       },
       jobs: async ( _root, { limit, offset } ) => {
-         const jobs = await getJobs( limit, offset )
+         const jobItems = await getJobs( limit, offset )
          const jobsCount = await jobCount()
-         return { jobs, jobsCount }
+         return { jobItems, jobsCount }
       },
       company: async ( _root, args ) => {
          const company = await getCompany( args.id )

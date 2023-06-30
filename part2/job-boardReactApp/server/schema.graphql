@@ -12,11 +12,6 @@ type Mutation {
 	updateJob(input: UpdateJobInput): Job
 }
 
-type JobData {
-	jobs: [Job!]!
-	totalCount: Int!
-}
-
 type Job {
 	id: ID!
 	title: String!
@@ -26,6 +21,10 @@ type Job {
 	description: String
 }
 
+type JobData {
+	jobItems: [Job!]!
+	totalCount: Int!
+}
 #  Kindly note that in schema.prisma the job and company has one-to-many relationship defined thus check later, it its nessary to define it
 
 type Company {

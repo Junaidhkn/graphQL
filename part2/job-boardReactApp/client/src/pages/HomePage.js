@@ -32,7 +32,7 @@ function HomePage () {
       <h1 className="title">
         Job Board
       </h1>
-      <JobList jobs={jobs} />
+      <JobList jobs={jobs.jobItems} />
 
       <div>
         <button className="button is-primary" onClick={previousPage}>Load Less</button>

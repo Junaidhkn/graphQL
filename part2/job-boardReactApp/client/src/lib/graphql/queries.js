@@ -35,12 +35,14 @@ export const client = new ApolloClient( {
 export const getJobsQuery = gql`
    query Jobs($limit:Int, $offset:Int){
       jobs(limit:$limit, offset:$offset){
+         jobItems{
          id
          title
          date
          company{
             id
             name
+         }
          }
       }
    }
